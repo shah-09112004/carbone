@@ -20,8 +20,8 @@ app.post('/render', async (req, res) => {
     const tempFilePath = path.join(__dirname, 'temp_template.docx');
     fs.writeFileSync(tempFilePath, response.data);
 
-    // 2. Render the template to PDF
-    carbone.render(tempFilePath, data, { convertTo: 'pdf' }, (err, result) => {
+    // 2. Render the template to DOCX (no PDF conversion)
+    carbone.render(tempFilePath, data, (err, result) => {
       // Delete temp file
       fs.unlinkSync(tempFilePath);
 
@@ -30,9 +30,9 @@ app.post('/render', async (req, res) => {
         return res.status(500).send('Rendering failed: ' + err.message);
       }
 
-      // 3. Send PDF as downloadable file
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'attachment; filename="output.pdf"');
+      // 3. Send the DOCX as downloadable file
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      res.setHeader('Content-Disposition', 'attachment; filename="output.docx"');
       res.end(result);
     });
 
@@ -43,5 +43,5 @@ app.post('/render', async (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('Carbone PDF render server running on http://localhost:3000');
+  console.log('Carbone DOCX render server running on http://localhost:3000');
 });
