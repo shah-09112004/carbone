@@ -1,16 +1,19 @@
 {
-  "name": "carbone-api-server",
+  "name": "carbone-server",
   "version": "1.0.0",
-  "description": "Custom Carbone API server with file upload and PDF generation",
+  "description": "Carbone template rendering server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Your Name",
-  "license": "MIT",
   "dependencies": {
-    "carbone": "^4.3.0",
+    "carbone": "^4.2.2",
     "express": "^4.18.2",
     "multer": "^1.4.5"
-  }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "author": "Ismail Shah",
+  "license": "MIT"
 }
